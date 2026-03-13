@@ -26,10 +26,14 @@ export function initSTate() {
 
   rl.prompt();
   const commandsList = getCommands();
+  const pokeApi = new PokeAPI();
 
   const state: State = {
     commands: commandsList,
     rl: rl,
+    pokeApi: pokeApi,
+    nextLocationsURL: "",
+    prevLocationsURL: "",
   };
   return state;
 }
