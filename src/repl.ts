@@ -4,10 +4,10 @@ export function cleanInput(input: string): string[] {
   return input.toLowerCase().trim().split(/\s+/).filter(Boolean);
 }
 
-export function startREPL(state: State) {
+export async function startREPL(state: State) {
   const { rl, commands } = state;
 
-  rl.on("line", (input: string) => {
+  rl.on("line", async (input: string) => {
     const wordsArr = cleanInput(input);
 
     if (wordsArr.length === 0) {
@@ -19,10 +19,12 @@ export function startREPL(state: State) {
 
     if (command in commands) {
       try {
-        commands[command].callback(state);
+        await commands[command].callback(state);
       } catch (error) {
         if (error instanceof Error) {
           console.log(error.message);
+        } else {
+          console.log("An unknown error occurred.");
         }
       }
     } else {
