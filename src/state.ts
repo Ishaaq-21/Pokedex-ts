@@ -2,6 +2,7 @@ import { Interface } from "node:readline";
 import { getCommands } from "./commands/commands_registry.js";
 import * as readline from "readline";
 import { PokeAPI } from "./pokeapi.js";
+import chalk from "chalk";
 
 export type CLICommand = {
   name: string;
@@ -21,7 +22,7 @@ export function initSTate() {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "\x1b[36mPokedex > \x1b[0m",
+    prompt: chalk.cyan("Pokedex > "),
   });
 
   rl.prompt();
