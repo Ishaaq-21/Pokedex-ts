@@ -1,6 +1,5 @@
-import { ShallowLocations } from "src/pokeapi.js";
-import { State } from "src/state.js";
 import chalk from "chalk";
+import { ShallowLocations, State } from "src/types/types.js";
 export async function commandMapb(state: State) {
   const { pokeApi } = state;
   const locationAreas: ShallowLocations = await pokeApi.fetchLocations(

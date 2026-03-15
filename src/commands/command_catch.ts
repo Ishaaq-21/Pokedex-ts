@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { State } from "src/state.js";
+import { State } from "src/types/types.js";
 
 export async function commandCatch(state: State, ...args: string[]) {
   if (args.length === 0) {
