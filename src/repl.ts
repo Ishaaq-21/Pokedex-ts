@@ -20,7 +20,7 @@ export async function startREPL(state: State) {
 
     if (command in commands) {
       try {
-        await commands[command].callback(state);
+        await commands[command].callback(state, ...wordsArr.slice(1));
       } catch (error) {
         if (error instanceof Error) {
           console.log(chalk.red(error.message, " ✗"));
