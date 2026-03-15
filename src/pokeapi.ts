@@ -53,24 +53,50 @@ type Name = {
   };
 };
 
-type GenerationGameIndex = {
-  game_index: number;
-  generation: {
-    name: string;
-    url: string;
-  };
-};
-
 type NamedAPIResource<T = any> = {
   name: string;
   url: string;
 };
 
-type Location = {
+export type LocationArea = {
   id: number;
   name: string;
-  region: NamedAPIResource;
+
+  location: NamedAPIResource;
+
+  game_index: number;
+
+  encounter_method_rates: EncounterMethodRate[];
+
   names: Name[];
-  game_indices: GenerationGameIndex[];
-  areas: NamedAPIResource[];
+
+  pokemon_encounters: PokemonEncounter[];
+};
+type EncounterMethodRate = {
+  encounter_method: NamedAPIResource;
+  version_details: EncounterVersionDetails[];
+};
+
+type EncounterVersionDetails = {
+  rate: number;
+  version: NamedAPIResource;
+};
+
+type PokemonEncounter = {
+  pokemon: NamedAPIResource;
+  version_details: PokemonVersionEncounter[];
+};
+
+type PokemonVersionEncounter = {
+  version: NamedAPIResource;
+  max_chance: number;
+  encounter_details: EncounterDetail[];
+};
+
+type EncounterDetail = {
+  min_level: number;
+  max_level: number;
+  condition_values: NamedAPIResource[];
+  chance: number;
+  method: NamedAPIResource;
 };
