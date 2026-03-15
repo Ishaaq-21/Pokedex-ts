@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { State } from "./state.js";
+import { State } from "./types/types.js";
 
 export function cleanInput(input: string): string[] {
   return input.toLowerCase().trim().split(/\s+/).filter(Boolean);
