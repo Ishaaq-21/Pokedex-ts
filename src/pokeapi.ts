@@ -36,6 +36,33 @@ export class PokeAPI {
       throw new Error("Failed to fetch location area");
     }
   }
+
+  async fetchPokemon(pokemonName: string): Promise<SimplePokemon> {
+    const url = `${PokeAPI.baseURL}/pokemon/${pokemonName}`;
+
+    if (this.cache.get(url)) {
+      const cachedData = this.cache.get(url);
+      return cachedData?.val;
+    }
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const pokeObj: SimplePokemon = {
+        id: data.id,
+        name: data.name,
+        base_experience: data.base_experience,
+        height: data.height,
+        weight: data.weight,
+        stats: data.stats,
+        types: data.types,
+      };
+      return pokeObj;
+    } catch (error) {
+      throw new Error("Failed to fetch Pokemon");
+    }
+  }
 }
 
 export type ShallowLocations = {
