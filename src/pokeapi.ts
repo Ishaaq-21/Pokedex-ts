@@ -19,17 +19,22 @@ export class PokeAPI {
     return data;
   }
 
-  async fetchLocation(locationName: string): Promise<Location> {
-    const url = `${PokeAPI.baseURL}/location/${locationName}/`;
+  async fetchLocation(locationName: string): Promise<LocationArea> {
+    const url = `${PokeAPI.baseURL}/location-area/${locationName}/`;
     if (this.cache.get(url)) {
       const cachedData = this.cache.get(url);
       return cachedData?.val;
     }
-    const response = await fetch(url);
-    const data: Location = await response.json();
-    this.cache.add(url, data);
+    try {
+      const response = await fetch(url);
 
-    return data;
+      const data: LocationArea = await response.json();
+      this.cache.add(url, data);
+
+      return data;
+    } catch (error) {
+      throw new Error("Failed to fetch location area");
+    }
   }
 }
 
