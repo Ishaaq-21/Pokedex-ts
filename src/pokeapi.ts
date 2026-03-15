@@ -1,4 +1,9 @@
 import { Cache } from "./pokecache.js";
+import {
+  LocationArea,
+  ShallowLocations,
+  SimplePokemon,
+} from "./types/types.js";
 
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
@@ -64,66 +69,3 @@ export class PokeAPI {
     }
   }
 }
-
-export type ShallowLocations = {
-  count: number; // total number of locations
-  next: string | null; // next page URL
-  previous: string | null; // previous page URL
-  results: NamedAPIResource[]; // shallow location objects
-};
-
-type Name = {
-  name: string;
-  language: {
-    name: string;
-    url: string;
-  };
-};
-
-type NamedAPIResource<T = any> = {
-  name: string;
-  url: string;
-};
-
-export type LocationArea = {
-  id: number;
-  name: string;
-
-  location: NamedAPIResource;
-
-  game_index: number;
-
-  encounter_method_rates: EncounterMethodRate[];
-
-  names: Name[];
-
-  pokemon_encounters: PokemonEncounter[];
-};
-type EncounterMethodRate = {
-  encounter_method: NamedAPIResource;
-  version_details: EncounterVersionDetails[];
-};
-
-type EncounterVersionDetails = {
-  rate: number;
-  version: NamedAPIResource;
-};
-
-type PokemonEncounter = {
-  pokemon: NamedAPIResource;
-  version_details: PokemonVersionEncounter[];
-};
-
-type PokemonVersionEncounter = {
-  version: NamedAPIResource;
-  max_chance: number;
-  encounter_details: EncounterDetail[];
-};
-
-type EncounterDetail = {
-  min_level: number;
-  max_level: number;
-  condition_values: NamedAPIResource[];
-  chance: number;
-  method: NamedAPIResource;
-};
