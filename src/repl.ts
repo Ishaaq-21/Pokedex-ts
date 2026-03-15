@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
@@ -22,7 +23,7 @@ export async function startREPL(state: State) {
         await commands[command].callback(state);
       } catch (error) {
         if (error instanceof Error) {
-          console.log(error.message);
+          console.log(chalk.red(error.message, " ✗"));
         } else {
           console.log("An unknown error occurred.");
         }
