@@ -21,6 +21,7 @@ export function initSTate() {
     pokeApi: pokeApi,
     nextLocationsURL: "",
     prevLocationsURL: "",
+    caughtPokemons: [],
   };
   return state;
 }
