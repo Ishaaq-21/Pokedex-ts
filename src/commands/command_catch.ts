@@ -14,11 +14,12 @@ export async function commandCatch(state: State, ...args: string[]) {
 
   const wasCaught = isCaught(pokemon.base_experience);
 
-  console.log(
-    wasCaught
-      ? `${pokeName} was caught ✓✓`
-      : chalk.red(`${pokeName} escaped !`),
-  );
+  if (wasCaught) {
+    state.caughtPokemons.push(pokemon);
+    console.log(`${pokeName} was caught ✓✓`);
+  } else {
+    console.log(chalk.red(`${pokeName} escaped !`));
+  }
 }
 
 const isCaught = (baseExp: number): boolean => {
