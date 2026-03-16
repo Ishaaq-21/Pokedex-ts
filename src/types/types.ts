@@ -14,6 +14,7 @@ export type State = {
   pokeApi: PokeAPI;
   nextLocationsURL: string;
   prevLocationsURL: string;
+  caughtPokemons: SimplePokemon[];
 };
 
 export type ShallowLocations = {
